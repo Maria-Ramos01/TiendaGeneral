@@ -1,0 +1,100 @@
+/* Reset Básico y Variables */
+:root {
+--primary-color: #2c3e50;
+--secondary-color: #3498db;
+--bg-color: #f8f9fa;
+--card-bg: #ffffff;
+--text-color: #333333;
+--border-color: #e0e0e0;
+--accent-color: #e74c3c;
+--font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+font-family: var(--font-main);
+background-color: var(--bg-color);
+color: var(--text-color);
+line-height: 1.6;
+}
+
+/* Header & Nav */
+header {
+background-color: var(--primary-color);
+color: white;
+padding: 1rem 2rem;
+}
+
+header nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+header nav a {
+color: white;
+text-decoration: none;
+font-weight: bold;
+margin-right: 15px;
+}
+
+header nav a:hover {
+color: var(--secondary-color);
+}
+
+main {
+max-width: 1200px;
+margin: 2rem auto;
+padding: 0 1rem;
+}
+
+/* Grids & Cards generales */
+.tiendas-grid, .productos-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 1.5rem;
+margin-top: 1rem;
+}
+
+.producto-card, .tienda-card {
+background: var(--card-bg);
+border: 1px solid var(--border-color);
+border-radius: 8px;
+padding: 1.2rem;
+box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+transition: transform 0.2s ease;
+}
+
+.producto-card:hover, .tienda-card:hover {
+transform: translateY(-3px);
+}
+
+/* Botones Globale */
+.btn-primary, .btn-secondary, .btn-danger, .btn-visitar {
+padding: 0.6rem 1.2rem;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-weight: bold;
+text-decoration: none;
+display: inline-block;
+}
+
+.btn-primary { background-color: var(--secondary-color); color: white; }
+.btn-secondary { background-color: #7f8c8d; color: white; }
+.btn-danger { background-color: var(--accent-color); color: white; }
+.btn-visitar { background-color: var(--primary-color); color: white; margin-top: 1rem; }
+
+/* Carrito Table */
+.cart-container { background: white; padding: 2rem; border-radius: 8px; }
+.cart-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+.cart-table th, .cart-table td { padding: 12px; border-bottom: 1px solid var(--border-color); text-align: left; }
+.cart-summary { margin-top: 2rem; text-align: right; background: #f1f1f1; padding: 1.5rem; border-radius: 8px; }
+.quantity-controls button { width: 25px; height: 25px; cursor: pointer; }

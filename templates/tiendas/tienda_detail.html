@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ tienda.nombre }} - Centro Comercial{% endblock %}
+
+{% block extra_css %}
+    <!-- Carga CSS dinámico según el slug de la tienda (ej: ropa.css, lanas.css, dulces.css) -->
+    <link rel="stylesheet" href="{% static 'css/'|add:tienda.slug|add:'.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="tienda-header">
+        <h1>{{ tienda.nombre }}</h1>
+        <p>{{ tienda.descripcion }}</p>
+    </section>
+
+    <section class="productos-grid">
+        {% for producto in productos %}
+            <div class="producto-card">
+                <h3>{{ producto.nombre }}</h3>
+                <p>Precio: ${{ producto.precio }}</p>
+                <button onclick="addToCart('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.precio }}')">
+                    Agregar al Carrito
+                </button>
+            </div>
+        {% empty %}
+            <p>No hay productos disponibles en esta tienda.</p>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Carga JS dinámico según el slug de la tienda -->
+    <script src="{% static 'js/'|add:tienda.slug|add:'.js' %}"></script>
+{% endblock %}

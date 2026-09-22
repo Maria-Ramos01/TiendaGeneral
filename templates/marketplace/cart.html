@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tu Carrito - Centro Comercial{% endblock %}
+
+{% block content %}
+
+<div id="cart-empty-message" class="cart-empty" style="display: none;">
+    <p>Tu carrito está actualmente vacío.</p>
+    <a href="/" class="btn-primary">Volver al Centro Comercial</a>
+</div>
+
+<div id="cart-content" class="cart-content">
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Tienda</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items-body">
+            <!-- Se llena dinámicamente desde cart.js -->
+        </tbody>
+    </table>
+
+    <div class="cart-summary">
+        <h3>Resumen del Pedido</h3>
+        <div class="summary-line">
+            <span>Total Items:</span>
+            <span id="summary-total-items">0</span>
+        </div>
+        <div class="summary-line total">
+            <span>Total a Pagar:</span>
+            <span id="summary-total-price">$0.00</span>
+        </div>
+        <div class="summary-actions">
+            <button class="btn-secondary" onclick="clearCart()">Vaciar Carrito</button>
+            <button class="btn-primary" onclick="processCheckout()">Procesar Compra</button>
+        </div>
+    </div>
+</div>
+
+
+{% block extra_js %}
+
+{% endblock %}
