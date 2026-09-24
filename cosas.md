@@ -13,5 +13,8 @@ Carga de datos por CSV para masivo / APP 01 x vez
 Estudiar conceptos y que hace cada modulo
 
 SuperUser : mafe - holachao123
+admin ropa : maria - chaohola123
+admin lanas : fernanda - nosino123
+admin dulces : sofia - dulces123
 
 Aplicar 3FN (base de datos) cumplir serie de reglas, uso de claves primarias y foraneas, uso o creacion de tablas auxiliares(temporales)

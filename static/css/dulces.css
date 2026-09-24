@@ -1,35 +1,57 @@
-/* Tema Específico: Tienda de Dulces (Divertido / Colorido / Festivo) */
-:root {
---dulces-primary: #ff4081;
---dulces-secondary: #ffeb3b;
---dulces-bg: #fff0f5;
-}
-
+/* Paleta Dulces: Rosados, Pasteles y Tonos Chicle */
 body {
-background-color: var(--dulces-bg);
+    background-color: #fff0f5;
+    color: #4a2e35;
 }
 
-.tienda-header h1 {
-color: var(--dulces-primary);
-font-size: 2.5rem;
-font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+.tienda-header-banner {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+    color: #ffffff;
+    margin-bottom: 2rem;
 }
 
-.producto-card {
-border-radius: 20px;
-border: 3px solid var(--dulces-primary);
-box-shadow: 4px 4px 0px var(--dulces-secondary);
+.tienda-header-banner h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
-.btn-primary, .btn-add-cart {
-background-color: var(--dulces-primary) !important;
-color: white !important;
-border-radius: 25px !important;
-font-weight: bold;
-box-shadow: 0 4px 0 #c60055;
+.card-producto {
+    background: #ffffff;
+    border: 2px solid #ffccd5;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-primary:active {
-transform: translateY(2px);
-box-shadow: 0 2px 0 #c60055;
+.card-producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+}
+
+.precio {
+    color: #ff3366;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.btn-add-cart {
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.btn-add-cart:hover {
+    background-color: #ff1493;
 }

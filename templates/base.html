@@ -6,28 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Centro Comercial{% endblock %}</title>
     
-    <!-- CSS Base del Marketplace -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    
-    <!-- CSS Específico de cada Tienda -->
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/">Inicio Centro Comercial</a>
-            <a href="/carrito/">🛒 Carrito (<span id="cart-count">0</span>)</a>
+    <header class="main-header">
+        <nav class="nav-container">
+            <a href="/" class="nav-logo">Inicio Centro Comercial</a>
+            <button id="cart-btn" class="cart-trigger" onclick="toggleCart()">
+                🛒 Carrito (<span id="cart-count">0</span>)
+            </button>
         </nav>
     </header>
 
-    <main>
+    <!-- Superposición (Overlay) y Carrito Deslizante -->
+    <div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
+    
+    <aside id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>🛒 Tu Carrito General</h2>
+            <button class="close-cart-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items-container" class="cart-items">
+            <!-- Los productos agregados se renderizan aquí dinámicamente -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <a href="{% url 'cart' %}" class="btn-checkout">Procesar Compra</a>
+        </div>
+    </aside>
+
+    <main class="content-container">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- JS Base / Carrito -->
-    <script src="{% static 'js/cart.js' %}"></script>
+<!-- 1. Cargar el archivo JS externo -->
+<script src="{% static 'js/cart.js' %}"></script>
+
+<!-- 2. Pasar los tokens de Django a JSON seguro -->
+{{ request.session.access_token|default:""|json_script:"jwt-access-token" }}
+{{ request.session.refresh_token|default:""|json_script:"jwt-refresh-token" }}
+
+<!-- 3. Bloque JavaScript limpio sin etiquetas {% %} dentro -->
+<script>
+    // Leer los tokens insertados por Django desde el DOM
+    const accessToken = JSON.parse(document.getElementById('jwt-access-token').textContent);
+    const refreshToken = JSON.parse(document.getElementById('jwt-refresh-token').textContent);
+
+    if (accessToken) {
+        localStorage.setItem('access_token', accessToken);
+    }
+    if (refreshToken) {
+        localStorage.setItem('refresh_token', refreshToken);
+    }
+
+    // Función global para realizar peticiones fetch autenticadas
+    async function fetchConJWT(url, options = {}) {
+        const token = localStorage.getItem('access_token');
+
+        options.headers = {
+            ...options.headers,
+            'Content-Type': 'application/json',
+            'Authorization': token ? `Bearer ${token}` : ''
+        };
+
+        const response = await fetch(url, options);
+
+        if (response.status === 401) {
+            console.warn('Token JWT expirado o inválido.');
+        }
+
+        return response;
+    }
+</script>
     
-    <!-- JS Específico de cada Tienda -->
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,35 +1,53 @@
-/* Tema Específico: Tienda de Lanas (Cálido / Artesanal / Textil) */
-:root {
---lanas-primary: #8b5a2b;
---lanas-secondary: #e0a96d;
---lanas-bg: #faf6f0;
-}
-
+/* Paleta Lanas: Multicolor (Púrpura, Azul, Naranja y Violeta) */
 body {
-background-color: var(--lanas-bg);
-color: #4a3b32;
+    background-color: #fcf8ff;
+    color: #321e30;
 }
 
-.tienda-header {
-background-color: var(--lanas-secondary);
-padding: 2rem;
-border-radius: 12px;
-color: #fff;
-text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+.tienda-header-banner {
+    background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 30%, #a1c4fd 70%, #c2e9fb 100%);
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(161, 196, 253, 0.4);
+    color: #2c3e50;
+    margin-bottom: 2rem;
 }
 
-.producto-card {
-border-radius: 15px;
-border: 2px dashed var(--lanas-primary);
-background-color: #fff;
+.tienda-header-banner h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    background: -webkit-linear-gradient(45deg, #6b11ff, #b5179e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.btn-primary, .btn-add-cart {
-background-color: var(--lanas-primary) !important;
-color: #fff !important;
-border-radius: 20px !important;
+.card-producto {
+    background: #ffffff;
+    border-top: 4px solid;
+    border-image: linear-gradient(to right, #ff758c, #ff7eb3, #7209b7) 1;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(114, 9, 183, 0.1);
 }
 
-.btn-primary:hover {
-background-color: #6d441f !important;
+.precio {
+    color: #7209b7;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.btn-add-cart {
+    background: linear-gradient(135deg, #7209b7 0%, #b5179e 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-add-cart:hover {
+    opacity: 0.9;
 }

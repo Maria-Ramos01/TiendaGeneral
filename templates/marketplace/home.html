@@ -1,6 +1,81 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Centro Comercial - Inicio{% endblock %}
+{% block title %}🏬 Centro Comercial Virtual - Inicio{% endblock %}
 
 {% block content %}
+<!-- Banner Principal (Hero) -->
+<section class="hero-banner">
+    <div class="hero-content">
+        <h1>✨ ¡Bienvenido al Centro Comercial! </h1>
+        <p>Explora nuestras mejores tiendas locales y agrega tus productos favoritos a un solo carrito general.</p>
+    </div>
+</section>
+
+<!-- Sección de Tiendas -->
+<section class="home-section">
+    <h2 class="section-title"> Nuestras Tiendas Destacadas</h2>
+    
+    <div class="tiendas-grid">
+        {% for tienda in tiendas %}
+            <div class="card-tienda card-{{ tienda.slug }}">
+                <div class="card-header">
+                    <!-- Icono dinámico según el slug de la tienda -->
+                    <span class="tienda-icon">
+                        {% if 'ropa' in tienda.slug %}👗
+                        {% elif 'lana' in tienda.slug %}🧶
+                        {% elif 'dulce' in tienda.slug %}🍬
+                        {% else %}🛍️{% endif %}
+                    </span>
+                    <h3>{{ tienda.nombre }}</h3>
+                </div>
+                <div class="card-body">
+                    <p>{{ tienda.descripcion|default:"Descubre nuestra colección exclusiva de productos seleccionados para ti." }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'tienda_detail' slug=tienda.slug %}" class="btn-visitar">
+                        Entrar a la Tienda ➔
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-msg">⚠️ No hay tiendas disponibles por el momento.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Sección de Productos Destacados -->
+<section class="home-section">
+    <h2 class="section-title"> Productos Destacados</h2>
+    
+    <div class="productos-grid">
+        {% for producto in productos %}
+            <div class="card-producto">
+                <div class="badge-tienda">
+                    🏬 {{ producto.tienda.nombre }}
+                </div>
+                <div class="producto-icon">
+                    {% if 'ropa' in producto.tienda.slug %}👕
+                    {% elif 'lana' in producto.tienda.slug %}🧶
+                    {% elif 'dulce' in producto.tienda.slug %}🍭
+                    {% else %}📦{% endif %}
+                </div>
+                <h3>{{ producto.nombre }}</h3>
+                <p class="precio">${{ producto.precio }}</p>
+                
+                <div class="producto-acciones">
+                    <button class="btn-add-cart" 
+                            onclick="addToCart('{{ producto.id }}', '{{ producto.nombre|escapejs }}', '{{ producto.precio }}', '{{ producto.tienda.nombre|escapejs }}')">
+                        🛒 Añadir al Carrito
+                    </button>
+                    <a href="{% url 'producto_detail' tienda_slug=producto.tienda.slug producto_id=producto.id %}" class="btn-detalle">
+                        🔍 Ver Detalle
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-msg">📦 No hay productos destacados disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
